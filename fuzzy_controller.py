@@ -110,33 +110,35 @@ class TrafficLightController:
         Args:
             save_path: Optional path to save the figure
         """
-        fig, axes = plt.subplots(3, 1, figsize=(10, 12))
+        fig, axes = plt.subplots(3, 1, figsize=(10, 8))
         
         # Density membership functions
         axes[0].plot(self.density.universe, fuzz.interp_membership(self.density.universe, self.density['low'].mf, self.density.universe), 'b', label='Low')
         axes[0].plot(self.density.universe, fuzz.interp_membership(self.density.universe, self.density['medium'].mf, self.density.universe), 'g', label='Medium')
         axes[0].plot(self.density.universe, fuzz.interp_membership(self.density.universe, self.density['high'].mf, self.density.universe), 'r', label='High')
-        axes[0].set_title('Traffic Density Membership Functions', fontsize=14, fontweight='bold')
+        axes[0].set_title('Traffic Density Membership Functions', fontsize=12, fontweight='bold')
         axes[0].set_xlabel('Density (%)')
         axes[0].set_ylabel('Membership')
         axes[0].legend()
         axes[0].grid(True, alpha=0.3)
         
         # Wait time membership functions
+        
         axes[1].plot(self.wait.universe, fuzz.interp_membership(self.wait.universe, self.wait['short'].mf, self.wait.universe), 'b', label='Short')
         axes[1].plot(self.wait.universe, fuzz.interp_membership(self.wait.universe, self.wait['medium'].mf, self.wait.universe), 'g', label='Medium')
         axes[1].plot(self.wait.universe, fuzz.interp_membership(self.wait.universe, self.wait['long'].mf, self.wait.universe), 'r', label='Long')
-        axes[1].set_title('Wait Time Membership Functions', fontsize=14, fontweight='bold')
+        axes[1].set_title('Wait Time Membership Functions', fontsize=12, fontweight='bold')
         axes[1].set_xlabel('Wait Time (seconds)')
         axes[1].set_ylabel('Membership')
         axes[1].legend()
         axes[1].grid(True, alpha=0.3)
         
+        
         # Green time membership functions
         axes[2].plot(self.green.universe, fuzz.interp_membership(self.green.universe, self.green['short'].mf, self.green.universe), 'b', label='Short')
         axes[2].plot(self.green.universe, fuzz.interp_membership(self.green.universe, self.green['medium'].mf, self.green.universe), 'g', label='Medium')
         axes[2].plot(self.green.universe, fuzz.interp_membership(self.green.universe, self.green['long'].mf, self.green.universe), 'r', label='Long')
-        axes[2].set_title('Green Light Duration Membership Functions', fontsize=14, fontweight='bold')
+        axes[2].set_title('Green Light Duration Membership Functions', fontsize=12, fontweight='bold')
         axes[2].set_xlabel('Green Time (seconds)')
         axes[2].set_ylabel('Membership')
         axes[2].legend()
@@ -175,7 +177,7 @@ class TrafficLightController:
         wait_long = fuzz.interp_membership(self.wait.universe, self.wait['long'].mf, wait_time)
         
         # Create visualization
-        fig, axes = plt.subplots(3, 1, figsize=(12, 10))
+        fig, axes = plt.subplots(3, 1, figsize=(12, 18))
         
         # Plot density with current value
         axes[0].plot(self.density.universe, fuzz.interp_membership(self.density.universe, self.density['low'].mf, self.density.universe), 'b', linewidth=2, label='Low')
@@ -183,7 +185,7 @@ class TrafficLightController:
         axes[0].plot(self.density.universe, fuzz.interp_membership(self.density.universe, self.density['high'].mf, self.density.universe), 'r', linewidth=2, label='High')
         axes[0].axvline(density, color='black', linestyle='--', linewidth=2, label=f'Input: {density:.1f}%')
         axes[0].set_title(f'Density Fuzzification (Low: {density_low:.2f}, Medium: {density_medium:.2f}, High: {density_high:.2f})', 
-                         fontsize=12, fontweight='bold')
+                         fontsize=9, fontweight='bold')
         axes[0].set_xlabel('Density (%)')
         axes[0].set_ylabel('Membership')
         axes[0].legend()
@@ -195,7 +197,7 @@ class TrafficLightController:
         axes[1].plot(self.wait.universe, fuzz.interp_membership(self.wait.universe, self.wait['long'].mf, self.wait.universe), 'r', linewidth=2, label='Long')
         axes[1].axvline(wait_time, color='black', linestyle='--', linewidth=2, label=f'Input: {wait_time:.1f}s')
         axes[1].set_title(f'Wait Time Fuzzification (Short: {wait_short:.2f}, Medium: {wait_medium:.2f}, Long: {wait_long:.2f})', 
-                         fontsize=12, fontweight='bold')
+                         fontsize=9, fontweight='bold')
         axes[1].set_xlabel('Wait Time (seconds)')
         axes[1].set_ylabel('Membership')
         axes[1].legend()
@@ -210,7 +212,7 @@ class TrafficLightController:
                             fuzz.interp_membership(self.green.universe, self.green.output_mf, self.green.universe),
                             alpha=0.3, color='orange', label='Aggregated Output')
         axes[2].set_title(f'Defuzzification → Green Time: {green_time:.1f} seconds', 
-                         fontsize=12, fontweight='bold')
+                         fontsize=9, fontweight='bold')
         axes[2].set_xlabel('Green Time (seconds)')
         axes[2].set_ylabel('Membership')
         axes[2].legend()
